@@ -10,11 +10,9 @@ def illusion_image_create(image_path):
         canvas.paste(i, (0, 0), i)
     return canvas
 
-def _change_alpha( img):
+def _change_alpha(img):
     datas = img.getdata()
-    new_data = []
-    for item in datas:
-        new_data.append((127, 127, 127, 255-(item[0]+item[1]+item[2])//3))
+    new_data = [(127, 127, 127, 255-(item[0]+item[1]+item[2])//3) for item in datas]
     img.putdata(new_data)
     return img
 
