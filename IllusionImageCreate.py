@@ -16,11 +16,15 @@ def _change_alpha(img):
     img.putdata(new_data)
     return img
 
-def _create_4K( path):
+def _create_4K(path):
     img = Image.open(path).convert('L').convert("RGBA")
     width, height = img.size
-    new_width = 4000
-    new_height = int((new_width/ width) * height)
+    if (width > height):
+        new_width = 4000
+        new_height = int((new_width/ width) * height)
+    else:
+        new_height = 4000
+        new_width = int((new_height/ height) * width)
     img = img.resize((new_width, new_height))
     img = _change_alpha(ImageEnhance.Brightness(img).enhance(1.0))
     return img
